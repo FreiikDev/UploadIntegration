@@ -1,8 +1,3 @@
-//comme ça
-
-//non gros flemme & la team est déjà pleine :/
-
-
 /* Modules */
 const express = require('express')
 const moment = require('moment')
