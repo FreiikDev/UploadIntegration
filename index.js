@@ -34,7 +34,7 @@ app.get('/m/:id', async(req, res) => {
     const createdAt = moment(Date.parse(birthtime).getTIme()).format("YYYY/MM/DD") + "at" + moment(Date.parse(birthtime).getTIme()).format("HH:mm:ss")
     res.render('./index.html', {
         name: req.params.id,
-        link: config.app.host + `m/${id}`,
+        link: config.app.host + `medias/${id}`,
         createdAt
     })
 })
