@@ -1,41 +1,38 @@
 /* Modules */
 const express = require('express')
-const moment = require('moment')
+const moment = require("moment-timezone");
 const fs = require('fs')
 
 const config = require('./config.json')
-const app = express()
-const port = 31337
+const app = express();
+const port = config.app.port
 
-app.listen(port, async() => {
+app.listen(port, async () => {
     Logger.info(`App listening on port ${port}`)
 })
 
-app.set('view engine', 'ejs');
-app.use(express.static('medias'));
+app.set('view engine', 'ejs');;
+app.use("/medias", express.static('medias'));
 
+app.get('/:id', async (req, res) => {
+    if (!fs.existsSync(`./medias/${req.params.id}`)) return res.status(404).send("cc")
 
-app.use((req, res) => {
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-});
+    const { birthtime, size } = fs.statSync(`./medias/${req.params.id}`);
+    const createdAt = `${moment.tz(birthtime, "Europe/Paris").format("DD/MM/YYYY")} at ${moment.tz(birthtime, "Europe/Paris").format("HH:mm:ss")}`
 
-app.get('/m/:id', async(req, res) => {
-    console.log(req.params.id)
+    function getFileSize(size) {
+        const i = Math.floor(Math.log(size) / Math.log(1024));
+        return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i];
+    }
 
-    if (!fs.existsSync(`./medias/${req.params.id}`)) return res.status(200).send({
-        error: "Unknow id"
-    })
-
-    const { birthtime } = fs.statSync(`./medias/${req.params.id}`);
-
-    const createdAt = moment(Date.parse(birthtime).getTIme()).format("YYYY/MM/DD") + "at" + moment(Date.parse(birthtime).getTIme()).format("HH:mm:ss")
-    res.render('./index.html', {
+    res.render('./index.ejs', {
         name: req.params.id,
-        link: config.app.host + `medias/${id}`,
-        createdAt
+        link: config.app.host + `medias/${req.params.id}`,
+        createdAt,
+        size: getFileSize(size),
+        show: async () => {
+            res.redirect(config.app.host + `medias/${req.params.id}`)
+        }
     })
 })
 
@@ -46,6 +43,6 @@ function Logger(type, text) {
     console.log(`[${time}] [${type.toUpperCase()}] ${text}`)
 }
 
-Logger.info = async(text) => {
+Logger.info = async (text) => {
     Logger('info', text)
 }
