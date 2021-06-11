@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VoltBot - Screenshot</title>
-    <meta property="og:site_name" content="VoltBot - Screenshot">
-    <meta name="author" content="VoltBot">
-    <meta name="theme-color" content="#ffb330">
+    <title><%= nameWeb %></title>
+    <meta property="og:site_name" content="<%= nameWeb %>">
+    <meta name="author" content="<%= nameWeb %>">
+    <meta name="theme-color" content="<%= color %>">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="<%= link %>">
-    <meta property="og:description" content="Uploaded on <%= createdAt %>">
+    <meta property="og:description" content="<%= created %>">
     <meta property="og:title" content="<%= name %> (<%= size %>)" />
     <meta property="og:type" content="article">
     <meta property="og:url" content="<%= link %>">
@@ -39,9 +39,7 @@
                             style="border-radius: 5px;">
                     </a>
                     <br><br>
-                    <h5>Uploaded on <span class="data">
-                            <%= createdAt %>
-                        </span>
+                    <h5><%= created %>
                     </h5>
                 </div>
             </div>
