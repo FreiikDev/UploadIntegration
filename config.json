@@ -1,6 +1,6 @@
 {
     "app": {
         "port": 80,
-        "host": "https://m.voltbot.xyz/"
+        "host": "https://s.voltbot.xyz/"
     }
 }
