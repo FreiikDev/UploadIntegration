@@ -1,6 +1,7 @@
 {
   "name": "ScreenshotEmbedder",
   "version": "1.0.0",
+  "author": "D0wzy",
   "description": "",
   "main": "index.js",
   "scripts": {
