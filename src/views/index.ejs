@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= nameWeb %></title>
+    <meta property="og:site_name" content="<%= nameWeb %>">
+    <meta name="author" content="<%= nameWeb %>">
+    <meta name="theme-color" content="<%= color %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="<%= link %>">
+    <meta property="og:description" content="<%= created %>">
+    <meta property="og:title" content="<%= name %> (<%= size %>)"/>
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<%= link %>">
+    <meta property="og:locale" content="en_US">
+    <link rel="icon" href="<%= icon %>" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div>
+    <h1><%= name %> - <span><%= size %></span></h1>
+    <a id="image-link" href="<%= link %>" target="_blank">
+        <img src="<%= link %>" alt="Responsive image">
+    </a>
+    <br><br>
+    <h2><%= created %></h2>
+</div>
+</body>
+</html>

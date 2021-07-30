@@ -1,0 +1,32 @@
+{
+  "port": 80,
+  "timezone": "ETC/GMT+0",
+  "error": "You're lost? Join the best french Discord server ! https://discord.gg/france",
+  "domains": [
+    {
+      "default": true,
+      "color": "#ffb330",
+      "nameWeb": "VoltBot — Screenshot",
+      "language": "en",
+      "icon": "https://raw.githubusercontent.com/VoltBot-Discord/Default-Website/master/assets/img/logo.png"
+    },
+    {
+      "color": "#90ff8a",
+      "nameWeb": "ChillFR — Capture",
+      "language": "fr",
+      "icon": "https://raw.githubusercontent.com/ChillFR/Assets/main/logo_transparent.png"
+    }
+  ],
+  "languages": [
+    {
+      "locale": "fr",
+      "uploadedOn": "Téléversé le",
+      "uploadedAt": "à"
+    },
+    {
+      "locale": "en",
+      "uploadedOn": "Uploaded on",
+      "uploadedAt": "at"
+    }
+  ]
+}

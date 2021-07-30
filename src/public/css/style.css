@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #1b1b1b;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: white;
+    font-family: 'PT Sans', sans-serif;
+    overflow: hidden;
+}
+
+div {
+    top: 5vh;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    height: 90vh;
+}
+
+h2 {
+    font-style: italic;
+}
+
+span {
+    font-weight: 100;
+}
+
+img {
+    max-height: 80%;
+    border-radius: 5px;
+}

@@ -1,0 +1,21 @@
+{
+  "port": 80,
+  "timezone": "Europe/Paris",
+  "error": "File not found",
+  "domains": [
+    {
+      "default": true,
+      "color": "#2f3136",
+      "nameWeb": "ScreenshotEmbedder",
+      "language": "en",
+      "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+    }
+  ],
+  "languages": [
+    {
+      "locale": "en",
+      "uploadedOn": "Uploaded on",
+      "uploadedAt": "at"
+    }
+  ]
+}
