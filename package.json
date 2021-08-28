@@ -1,0 +1,24 @@
+{
+  "name": "ScreenshotEmbedder",
+  "description": "Make your screenshot with beauty <3.",
+  "version": "1.0.0",
+  "author": "D0wzy, Freiik",
+  "main": "src/app.js",
+  "keywords": [
+    "screenshot",
+    "embedder",
+    "screenshotembedder",
+    "expressjs",
+    "website"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "dependencies": {
+    "ejs": "latest",
+    "express": "latest",
+    "formidable": "^1.2.2",
+    "moment-timezone": "latest"
+  }
+}
