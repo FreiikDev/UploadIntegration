@@ -7,6 +7,7 @@
       "default": true,
       "color": "#ffb330",
       "nameWeb": "VoltBot — Screenshot",
+      "hostname": "s.voltbot.xyz",
       "language": "en",
       "icon": "https://raw.githubusercontent.com/VoltBot-Discord/Default-Website/master/assets/img/logo.png"
     },
@@ -64,7 +65,12 @@
     {
       "username": "Adam",
       "key": "toto2007",
-      "activated": true
+      "activated": true,
+      "domains": [
+        "a.dam.best",
+        "i.chill.wiki"
+      ],
+      "size": 1337
     }
   ]
 }

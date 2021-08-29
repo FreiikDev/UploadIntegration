@@ -1,13 +1,14 @@
 let express = require('express'),
     moment = require("moment-timezone"),
-    formidable = require('formidable'),
+    {IncomingForm} = require('formidable'),
+    SelfReloadJson = require("self-reload-json"),
     {renameSync, mkdirSync, existsSync, readdirSync, statSync} = require('fs'),
     config = `${__dirname}/config.json`,
     app = express(),
     path = require("path");
 
 if(!existsSync(config)) throw new Error("You don't have the file config.json, please look an example at https://github.com/FreiikDev/ScreenshotEmbedder");
-config = require(config);
+config = new SelfReloadJson(config);
 defaultDomain = config.domains.filter(x => x.default);
 
 if (defaultDomain <= 0) throw new Error("There's no default domain in the configuration file.");
@@ -15,9 +16,9 @@ defaultDomain = defaultDomain[0];
 if (config.languages.length <= 0) throw new Error("There's no language(s) in the configuration file.");
 if (config.languages.filter(x => x.locale && x.uploadedOn && x.uploadedAt && x.uploadedBy).length < config.languages.length) throw new Error("Language configuration is invalid.");
 if (!defaultDomain.language || !config.languages.find(x => x.locale === defaultDomain.language)) throw new Error("Default domain configuration is invalid.");
-if (config.users.filter(x => x.username && x.key && x.activated).length < config.users.length) throw new Error("User configuration is invalid.");
-config.users.forEach(u => existsSync(`${__dirname}/medias/${u.username}`) ? null : mkdirSync(`${__dirname}/medias/${u.username}`))
+if (config.users.filter(x => x.username && x.key && x.activated && Array.isArray(x.domains) && !isNaN(x.size)).length < config.users.length) throw new Error("User configuration is invalid.");
 if(!existsSync(`${__dirname}/medias/`)) mkdirSync(`${__dirname}/medias/`);
+config.users.forEach(u => existsSync(`${__dirname}/medias/${u.username}`) ? null : mkdirSync(`${__dirname}/medias/${u.username}`))
 app.listen(config.port, () => Logger.info(`ScreenshotEmbbedder listening on port ${config.port}`));
 
 app.set('view engine', "ejs")
@@ -33,9 +34,10 @@ app.set('view engine', "ejs")
             const found = await readdirSync(`${__dirname}/medias/`, {withFileTypes: true})
                 .filter(dirent => dirent.isDirectory())
                 .filter(x => existsSync(`${__dirname}/medias/${x.name}/${req.params[0]}`) ? `${x.name}/${req.params[0]}` : null);
-            if (!found[0] || user_notified) return res.status(404).send(config.error)
+            if (!found[0] || user_notified) return res.status(404).send(config.error);
             user = found[0].name;
         }
+        if(user && !user.domains.includes(req.hostname)) return res.status(404).send(config.error);
         const {birthtime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`);
         let domain = config.domains.filter(x => x.hostname).filter(x => req.headers.host === x.hostname);
 
@@ -58,16 +60,16 @@ app.set('view engine', "ejs")
 
 app.post('/upload', async (req, res) => {
     if (!req.headers.apikey || !config.users.filter(x => x.key === req.headers.apikey).size < 1) return res.status(403).send("The provided api key is invalid.")
-    var form = new formidable.IncomingForm({
+    var form = new IncomingForm({
         multiples: false,
         uploadDir: `${__dirname}/medias/`
     });
 
     const user = config.users.filter(x => x.key === req.headers.apikey)[0];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
-
+    if(user.domains[0] !== "all" || user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
     let name;
-    form.maxFileSize = 10 * 1024 * 1024;
+    form.maxFileSize = user.size * 1024 * 1024;
 
 
     form.on('file', function (field, file) {

@@ -1,29 +1,43 @@
 {
-  "port": 80,
-  "timezone": "Europe/Paris",
-  "error": "File not found",
-  "domains": [
-    {
-      "default": true,
-      "color": "#2f3136",
-      "nameWeb": "ScreenshotEmbedder",
-      "language": "en",
-      "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-    }
-  ],
-  "languages": [
-    {
-      "locale": "en",
-      "uploadedOn": "Uploaded on",
-      "uploadedAt": "at",
-      "uploadedBy": "by"
-    }
-  ],
-  "users": [
-    {
-      "username": "test",
-      "key": "test",
-      "activated": true
-    }
-  ]
+   "port": 80,
+   "timezone": "Europe/Paris",
+   "error": "File not found",
+   "domains": [
+      {
+         "default": true,
+         "color": "#2f3136",
+         "hostname": "example.com",
+         "nameWeb": "ScreenshotEmbedder",
+         "language": "en",
+         "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+      }
+   ],
+   "languages": [
+      {
+         "locale": "en",
+         "uploadedOn": "Uploaded on",
+         "uploadedAt": "at",
+         "uploadedBy": "by"
+      }
+   ],
+   "users": [
+      {
+         "username": "test",
+         "key": "test",
+         "activated": true,
+         "domains": [
+            "all"
+         ],
+         "size": 0
+      },
+      {
+         "username": "adam",
+         "key": "43a114628b8a067455e683d75571f925ff0855ba3e8458e3b135527dd90b5028fe20cb56b261986e75aef7d48477ebdfa5b030bfcf2db224fad73fd0376c620e",
+         "domains": [
+            "all"
+         ],
+         "activated": true,
+         "size": 0
+      }
+   ]
 }
