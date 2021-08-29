@@ -16,8 +16,7 @@
 #### For that, run `npm run generate` and follow instructions.
 <img alt="Example generate" src="https://s.voltbot.xyz/medias/AG9X.gif" target="_blank" />
 
-#### If you use ShareX, import the generated file (in .SXCU) in the custom uploader settings.
-<img alt="Example ShareX Import" src="https://s.voltbot.xyz/medias/0T61.png" target="_blank" />
+#### If you use ShareX, import the generated file (in .SXCU) just by double clicking on the file.
 
 ### If you want use ShareX & an account configurated, configure as a custom uploader like this:
 - Click to new and choose your name
