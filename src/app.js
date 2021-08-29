@@ -36,6 +36,7 @@ app.set('view engine', "ejs")
                 .filter(x => existsSync(`${__dirname}/medias/${x.name}/${req.params[0]}`) ? `${x.name}/${req.params[0]}` : null);
             if (!found[0]) return res.status(404).send(config.error);
             user = found[0].name;
+            if(!config.users.filter(x => user === x.username)[0].domains.includes(req.hostname)) return res.status(404).send(config.error);
         }
         if (user_notified[0] && user_notified[0].domains[0] !== "all" && !user_notified[0].domains.includes(req.hostname)) return res.status(404).send(config.error);
         const {birthtime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`);
