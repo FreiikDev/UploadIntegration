@@ -56,17 +56,17 @@ function end() {
 
     let key = randomBytes(64).toString('hex');
     config.users.push({username, key, domains, "activated": true, size})
+    const path = join(__dirname, `/accounts/${username}-config.sxcu`)
+    if (!existsSync(`${__dirname}/accounts/`)) mkdirSync(`${__dirname}/accounts/`);
+    if (!existsSync(`${__dirname}/medias/`)) mkdirSync(`${__dirname}/medias/`);
     try {
-        const path = join(__dirname, `/accounts/${username}-config.sxcu`)
-        if(!existsSync(`${__dirname}/accounts/`)) mkdirSync(`${__dirname}/accounts/`);
-        if(!existsSync(`${__dirname}/medias/`)) mkdirSync(`${__dirname}/medias/`);
-        mkdirSync(`${__dirname}/medias/${username}`);
+        if (!existsSync(`${__dirname}/medias/${username}`)) mkdirSync(`${__dirname}/medias/${username}`);
         writeFileSync(`${__dirname}/config.json`, JSON.stringify(config, null, 3));
         writeFileSync(`${path}`, JSON.stringify({
             "Name": "ScreenshotEmbedder by D0wzy & Freiik",
             "DestinationType": "ImageUploader",
             "RequestMethod": "POST",
-            "RequestURL": "https://" + domains[0] === "all" ? defaultDomain.hostname : domains[0] + "/upload",
+            "RequestURL": `https://${domains[0] === "all" ? defaultDomain.hostname : domains[0]}/upload/`,
             "Headers": {
                 "apikey": key
             },
@@ -83,7 +83,7 @@ There is your configuration !
 -----------------------
 Username: ${username}
 API Key: ${key}
-Endpoint: https://${domains[0] === "all" ? defaultDomain.hostname : domains[0]}/upload
+Endpoint: https://${domains[0] === "all" ? defaultDomain.hostname : domains[0]}/upload/
 -----------------------`)
     process.exit(0);
 }
