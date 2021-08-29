@@ -28,16 +28,16 @@ app.set('view engine', "ejs")
     .get('/*', async (req, res) => {
         let file = req.params[0];
         let user;
-        let user_notified = config.users.filter(x => req.params[0].split("/")[0] === x.username).length >= 1;
-        if(req.params[0].split("/")[0] === "medias" && existsSync(`${__dirname}/medias/${req.params[0]}`))  res.render(`${__dirname}/medias/${req.params[0]}`)
-        if (!existsSync(`${__dirname}/medias/${req.params[0]}`) || user_notified) {
+        let user_notified = config.users.filter(x => req.params[0].split("/")[0] === x.username);
+        if (req.params[0].split("/")[0] === "medias" && existsSync(`${__dirname}/medias/${req.params[0]}`)) res.render(`${__dirname}/medias/${req.params[0]}`)
+        if (!existsSync(`${__dirname}/medias/${req.params[0]}`) && user_notified !== undefined) {
             const found = await readdirSync(`${__dirname}/medias/`, {withFileTypes: true})
                 .filter(dirent => dirent.isDirectory())
                 .filter(x => existsSync(`${__dirname}/medias/${x.name}/${req.params[0]}`) ? `${x.name}/${req.params[0]}` : null);
-            if (!found[0] || user_notified) return res.status(404).send(config.error);
+            if (!found[0]) return res.status(404).send(config.error);
             user = found[0].name;
         }
-        if(user && !user.domains.includes(req.hostname)) return res.status(404).send(config.error);
+        if (user_notified[0] && user_notified[0].domains[0] !== "all" && !user_notified[0].domains.includes(req.hostname)) return res.status(404).send(config.error);
         const {birthtime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`);
         let domain = config.domains.filter(x => x.hostname).filter(x => req.headers.host === x.hostname);
 
@@ -67,10 +67,10 @@ app.post('/upload', async (req, res) => {
 
     const user = config.users.filter(x => x.key === req.headers.apikey)[0];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
-    if(user.domains[0] !== "all" || user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
+    if (user.domains[0] !== "all" || user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
     let name;
-    form.maxFileSize = user.size * 1024 * 1024;
-
+    if (user.size === 0) form.maxFileSize = 1024 * 1024 * 1024 * 5;
+    else form.maxFileSize = user.size * 1024 * 1024;
 
     form.on('file', function (field, file) {
         name = file.name;
