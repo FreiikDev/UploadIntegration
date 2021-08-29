@@ -18,7 +18,7 @@
   "dependencies": {
     "ejs": "latest",
     "express": "latest",
-    "formidable": "^1.2.2",
+    "formidable": "latest",
     "moment-timezone": "latest"
   }
 }
