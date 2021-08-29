@@ -67,7 +67,7 @@ app.post('/upload', async (req, res) => {
 
     const user = config.users.filter(x => x.key === req.headers.apikey)[0];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
-    if (user.domains[0] !== "all" || user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
+    if (user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
     let name;
     if (user.size === 0) form.maxFileSize = 1024 * 1024 * 1024 * 5;
     else form.maxFileSize = user.size * 1024 * 1024;
