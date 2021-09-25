@@ -39,14 +39,14 @@ app.set('view engine', "ejs")
             if(!config.users.filter(x => user === x.username)[0].domains.includes(req.hostname) && !config.users.filter(x => user === x.username)[0].domains[0] === "all") return res.status(404).send(config.error);
         }
         if (user_notified[0] && user_notified[0].domains[0] !== "all" && !user_notified[0].domains.includes(req.hostname)) return res.status(404).send(config.error);
-        const {birthtime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`);
+        const {ctime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`);
         let domain = config.domains.filter(x => x.hostname).filter(x => req.headers.host === x.hostname);
 
         if (domain.length <= 0) domain = defaultDomain;
         else domain = domain[0];
         let language = config.languages.filter(x => x.locale === domain.language)[0];
         if (language.length <= 0) language = config.languages.filter(x => x.locale === defaultDomain.language)[0];
-        const date = moment.tz(birthtime, config.timezone).format(`MM/DD/YYYY HH:mm:ss`).split(" ");
+        const date = moment.tz(ctime, config.timezone).format(`MM/DD/YYYY HH:mm:ss`).split(" ");
         return res.render('./index.ejs', {
             color: domain.color ? domain.color : defaultDomain.color ? defaultDomain.color : "#000000",
             nameWeb: domain.nameWeb ? domain.nameWeb : defaultDomain.nameWeb ? defaultDomain.nameWeb : "ScreenshotEmbedder",
