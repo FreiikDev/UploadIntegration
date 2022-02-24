@@ -64,7 +64,6 @@ app.post('/upload', async (req, res) => {
         multiples: false,
         uploadDir: `${__dirname}/medias/`
     });
-    console.log(req)
     const user = config.users.filter(x => x.key === req.headers.apikey)[0];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
     if (user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
