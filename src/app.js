@@ -52,7 +52,7 @@ app.set('view engine', "ejs")
             name: file,
             user: user ? user : null,
             icon: domain.icon ? domain.icon : defaultDomain.icon ? defaultDomain.icon : "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-            link: `${req.secure ? "https" : "http"}://${req.headers.host}/medias/${user ? `${user}/` : ""}${file}`,
+            link: `${req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] : "http"}://${req.headers.host}/medias/${user ? `${user}/` : ""}${file}`,
             created: date[1] ? `${language.uploadedOn} ${date[0]} ${user ? `${language.uploadedBy} ${user}, ` : ""}${language.uploadedAt} ${date[1]}` : "",
             size: (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i],
         });
@@ -64,7 +64,7 @@ app.post('/upload', async (req, res) => {
         multiples: false,
         uploadDir: `${__dirname}/medias/`
     });
-
+    console.log(req)
     const user = config.users.filter(x => x.key === req.headers.apikey)[0];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
     if (user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
@@ -77,7 +77,7 @@ app.post('/upload', async (req, res) => {
             name = files.file.originalFilename;
             renameSync(files.file.filepath, path.join(form.uploadDir, user.username, name));
             Logger('created',`${user.username} uploaded on ${req.hostname} ${name}`)
-            res.status(200).send({link: `${req.secure ? "https" : "http"}://${req.hostname}/${name}`})
+            res.status(200).send({link: `${req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] : "http"}://${req.hostname}/${name}`})
         }else{
             res.status(403).send("You are not allowed to upload this type of file(s).");
         }
