@@ -1,14 +1,14 @@
 let express = require('express'),
     moment = require("moment-timezone"),
-    {IncomingForm} = require('formidable'),
+    { IncomingForm } = require('formidable'),
     SelfReloadJson = require("self-reload-json"),
-    {renameSync, mkdirSync, existsSync, readdirSync, statSync} = require('fs'),
+    { renameSync, mkdirSync, existsSync, readdirSync, statSync } = require('fs'),
     config = `${__dirname}/config.json`,
     app = express(),
     path = require("path"),
     Logger = (type, text) => console.log(`[${moment(Date.now()).format("HH:mm:ss")}] [${type.toUpperCase()}] ${text}`);
 
-if(!existsSync(config)) throw new Error("You don't have the file config.json, please look an example at https://github.com/FreiikDev/ScreenshotEmbedder");
+if (!existsSync(config)) throw new Error("You don't have the file config.json, please look an example at https://github.com/FreiikDev/ScreenshotEmbedder");
 config = new SelfReloadJson(config);
 let defaultDomain = config.domains.filter(x => x.default);
 
@@ -18,9 +18,9 @@ if (config.languages.length <= 0) throw new Error("There's no language(s) in the
 if (config.languages.filter(x => x.locale && x.uploadedOn && x.uploadedAt && x.uploadedBy).length < config.languages.length) throw new Error("Language configuration is invalid.");
 if (!defaultDomain.language || !config.languages.find(x => x.locale === defaultDomain.language)) throw new Error("Default domain configuration is invalid.");
 if (config.users.filter(x => x.username && x.key && x.activated && Array.isArray(x.domains) && !isNaN(x.size)).length < config.users.length) throw new Error("User configuration is invalid.");
-if(!existsSync(`${__dirname}/medias/`)) mkdirSync(`${__dirname}/medias/`);
+if (!existsSync(`${__dirname}/medias/`)) mkdirSync(`${__dirname}/medias/`);
 config.users.forEach(u => existsSync(`${__dirname}/medias/${u.username}`) ? null : mkdirSync(`${__dirname}/medias/${u.username}`))
-app.listen(config.port, () => Logger('info',`ScreenshotEmbbedder listening on port ${config.port}`));
+app.listen(config.port, () => Logger('info', `ScreenshotEmbbedder listening on port ${config.port}`));
 
 app.set('view engine', "ejs")
     .set('views', path.join(__dirname, '/views'))
@@ -28,17 +28,19 @@ app.set('view engine', "ejs")
     .use(express.static(__dirname + '/public'))
     .get('/*', async (req, res) => {
         if (req.params[0].split("/")[0] === "medias" || req.params[0].length === 0) return res.status(404).send(config.error);
-        let file = req.params[0], user, user_notified = config.users.filter(x => req.params[0].split("/")[0] === x.username);
-        if (!existsSync(`${__dirname}/medias/${req.params[0]}`) && user_notified !== undefined) {
-            const found = readdirSync(`${__dirname}/medias/`, {withFileTypes: true})
+        let user = null;
+        const file = req.params[0], https = req.headers['x-forwarded-proto'];
+        if (existsSync(`${__dirname}/medias/${req.params[0]}`)) {
+        } else if (user === null) {
+            const found = readdirSync(`${__dirname}/medias/`, { withFileTypes: true })
                 .filter(dirent => dirent.isDirectory())
                 .filter(x => existsSync(`${__dirname}/medias/${x.name}/${req.params[0]}`) ? `${x.name}/${req.params[0]}` : null);
             if (!found[0]) return res.status(404).send(config.error);
-            user = found[0].name;
-            if(!config.users.filter(x => user === x.username)[0].domains.includes(req.hostname) && !config.users.filter(x => user === x.username)[0].domains[0] === "all") return res.status(404).send(config.error);
+            user = config.users.filter(x => found[0].name === x.username)[0];
+            if (!user.domains.includes(req.hostname) && user.domains[0] === "all") return res.status(404).send(config.error);
         }
-        if (user_notified[0] && user_notified[0].domains[0] !== "all" && !user_notified[0].domains.includes(req.hostname)) return res.status(404).send(config.error);
-        const {ctime, size} = statSync(`${__dirname}/medias/${(user ? `${user}/` : "") + file}`),
+        if (user && user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(404).send(config.error);
+        const { ctime, size } = statSync(`${__dirname}/medias/${(user ? `${user.username}/` : "") + file}`),
             date = moment.tz(ctime, config.timezone).format(`MM/DD/YYYY HH:mm:ss`).split(" "),
             i = Math.floor(Math.log(size) / Math.log(1024));
         let domain = config.domains.filter(x => x.hostname).filter(x => req.headers.host === x.hostname);
@@ -50,10 +52,10 @@ app.set('view engine', "ejs")
             color: domain.color ? domain.color : defaultDomain.color ? defaultDomain.color : "#000000",
             nameWeb: domain.nameWeb ? domain.nameWeb : defaultDomain.nameWeb ? defaultDomain.nameWeb : "ScreenshotEmbedder",
             name: file,
-            user: user ? user : null,
+            user: user ? user.username : null,
             icon: domain.icon ? domain.icon : defaultDomain.icon ? defaultDomain.icon : "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-            link: `${req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] : "http"}://${req.headers.host}/medias/${user ? `${user}/` : ""}${file}`,
-            created: date[1] ? `${language.uploadedOn} ${date[0]} ${user ? `${language.uploadedBy} ${user}, ` : ""}${language.uploadedAt} ${date[1]}` : "",
+            link: `${https ? https : "http"}://${req.headers.host}/medias/${user ? `${user.username}/` : ""}${file}`,
+            created: date[1] ? `${language.uploadedOn} ${date[0]} ${user ? `${language.uploadedBy} ${user.username}, ` : ""}${language.uploadedAt} ${date[1]}` : "",
             size: (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i],
         });
     })
@@ -64,7 +66,7 @@ app.post('/upload', async (req, res) => {
         multiples: false,
         uploadDir: `${__dirname}/medias/`
     });
-    const user = config.users.filter(x => x.key === req.headers.apikey)[0];
+    const user = config.users.filter(x => x.key === req.headers.apikey)[0], https = req.headers['x-forwarded-proto'];
     if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
     if (user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
     let name;
@@ -72,12 +74,13 @@ app.post('/upload', async (req, res) => {
     else form.maxFileSize = user.size * 1024 * 1024;
 
     form.parse(req, (err, fields, files) => {
-        if(files.file){
+        if (err) return res.status(500).send("Internal server error")
+        if (files.file) {
             name = files.file.originalFilename;
             renameSync(files.file.filepath, path.join(form.uploadDir, user.username, name));
-            Logger('created',`${user.username} uploaded on ${req.hostname} ${name}`)
-            res.status(200).send({link: `${req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] : "http"}://${req.hostname}/${name}`})
-        }else{
+            Logger('created', `${user.username} uploaded on ${req.hostname} ${name}`)
+            res.status(200).send({ link: `${https ? https : "http"}://${req.hostname}/${name}` })
+        } else {
             res.status(403).send("You are not allowed to upload this type of file(s).");
         }
     })
