@@ -1,7 +1,0 @@
-.gitignore
-node_modules
-.idea
-package-lock.json
-.vscode
-.DS_Store
-.gitignore
