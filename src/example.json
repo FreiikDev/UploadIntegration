@@ -1,7 +1,7 @@
 {
   "port": 80,
   "timezone": "ETC/GMT+0",
-  "error": "You're lost? Join the best french Discord server ! https://discord.gg/france",
+  "error": "You're lost? https://volt.science",
   "domains": [
     {
       "default": true,
@@ -12,39 +12,11 @@
       "icon": "https://raw.githubusercontent.com/VoltBot-Discord/Default-Website/master/assets/img/logo.png"
     },
     {
-      "hostname": "i.chillfr.com",
-      "color": "#90ff8a",
-      "nameWeb": "ChillFR — Capture",
-      "language": "fr",
-      "icon": "https://raw.githubusercontent.com/ChillFR/Assets/main/logo_transparent.png"
-    },
-    {
-      "hostname": "i.chill.wiki",
-      "color": "#90ff8a",
-      "nameWeb": "ChillFR — Capture",
-      "language": "fr",
-      "icon": "https://raw.githubusercontent.com/ChillFR/Assets/main/logo_transparent.png"
-    },
-    {
-      "hostname": "i.dowzy.fr",
-      "color": "#2F3136",
-      "nameWeb": "D0wzy — Capture d'écran",
-      "language": "fr",
-      "icon": ""
-    },
-    {
       "hostname": "a.dam.best",
       "color": "#ffb330",
       "nameWeb": "Adam — Screenshot",
       "language": "en",
       "icon": "https://cdn.discordapp.com/avatars/809849085305421835/2a8ab285b622eaa8fa5980dacb38aca7.png?size=128"
-    },
-    {
-      "hostname": "real.dowzy.fr",
-      "color": "#2F3136",
-      "nameWeb": "D0wzy — Capture d'écran",
-      "language": "fr",
-      "icon": ""
     }
   ],
   "languages": [

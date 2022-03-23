@@ -21,14 +21,5 @@
       }
    ],
    "users": [
-      {
-         "username": "test",
-         "key": "test",
-         "activated": true,
-         "domains": [
-            "all"
-         ],
-         "size": 0
-      }
    ]
 }
