@@ -30,24 +30,23 @@ app.set('view engine', "ejs")
         if (req.params[0].split("/")[0] === "medias" || req.params[0].length === 0) return res.status(404).send(config.error);
         let user = null;
         const file = req.params[0], https = req.headers['x-forwarded-proto'];
-        if (existsSync(`${__dirname}/medias/${req.params[0]}`)) {
-        } else if (user === null) {
+        if (!existsSync(`${__dirname}/medias/${req.params[0]}`)) {
             const found = readdirSync(`${__dirname}/medias/`, { withFileTypes: true })
                 .filter(dirent => dirent.isDirectory())
                 .filter(x => existsSync(`${__dirname}/medias/${x.name}/${req.params[0]}`) ? `${x.name}/${req.params[0]}` : null);
             if (!found[0]) return res.status(404).send(config.error);
             user = config.users.filter(x => found[0].name === x.username)[0];
-            if (!user.domains.includes(req.hostname) && user.domains[0] === "all") return res.status(404).send(config.error);
+            if (!user.domains.includes(req.hostname) && user.domains[0] !== "all") return res.status(404).send(config.error);
         }
-        if (user && user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(404).send(config.error);
         const { ctime, size } = statSync(`${__dirname}/medias/${(user ? `${user.username}/` : "") + file}`),
-            date = moment.tz(ctime, config.timezone).format(`MM/DD/YYYY HH:mm:ss`).split(" "),
             i = Math.floor(Math.log(size) / Math.log(1024));
         let domain = config.domains.filter(x => x.hostname).filter(x => req.headers.host === x.hostname);
         if (domain.length <= 0) domain = defaultDomain;
         else domain = domain[0];
         let language = config.languages.filter(x => x.locale === domain.language)[0]
-        if (language.length <= 0) language = config.languages.filter(x => x.locale === defaultDomain.language)[0];
+        if (language.length <= 0) language = config.languages.filter(x => x.locale === defaultDomain.language)[0]
+        else return res.status(404).send("Invalid language setting: please contact the server administrator.");
+        const date = moment.tz(ctime, config.timezone).format(language.format ? language.format : `MM/DD/YYYY HH:mm:ss`).split(" ");
         return res.render('./index.ejs', {
             color: domain.color ? domain.color : defaultDomain.color ? defaultDomain.color : "#000000",
             nameWeb: domain.nameWeb ? domain.nameWeb : defaultDomain.nameWeb ? defaultDomain.nameWeb : "ScreenshotEmbedder",
@@ -67,16 +66,15 @@ app.post('/upload', async (req, res) => {
         uploadDir: `${__dirname}/medias/`
     });
     const user = config.users.filter(x => x.key === req.headers.apikey)[0], https = req.headers['x-forwarded-proto'];
-    if (!user.activated) return res.status(403).send("Your account is disabled by the administrator.");
+    if (!user.activated) return res.status(403).send("Your account is disabled by your administrator.");
     if (user.domains[0] !== "all" && !user.domains.includes(req.hostname)) return res.status(403).send("Your account don't have access to this domain, please contact your administrator.");
-    let name;
     if (user.size === 0) form.maxFileSize = 1024 * 1024 * 1024 * 5;
     else form.maxFileSize = user.size * 1024 * 1024;
 
     form.parse(req, (err, fields, files) => {
         if (err) return res.status(500).send("Internal server error")
         if (files.file) {
-            name = files.file.originalFilename;
+            const name = files.file.originalFilename;
             renameSync(files.file.filepath, path.join(form.uploadDir, user.username, name));
             Logger('created', `${user.username} uploaded on ${req.hostname} ${name}`)
             res.status(200).send({ link: `${https ? https : "http"}://${req.hostname}/${name}` })
