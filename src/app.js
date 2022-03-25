@@ -14,7 +14,7 @@ let defaultDomain = config.domains.filter(x => x.default);
 
 if (defaultDomain <= 0) throw new Error("There's no default domain in the configuration file.");
 defaultDomain = defaultDomain[0];
-if (config.languages.length <= 0) throw new Error("There's no language(s) in the configuration file.");
+if (config.languages.length <= 0) throw new Error("There's no language in the configuration file.");
 if (config.languages.filter(x => x.locale && x.uploadedOn && x.uploadedAt && x.uploadedBy).length < config.languages.length) throw new Error("Language configuration is invalid.");
 if (!defaultDomain.language || !config.languages.find(x => x.locale === defaultDomain.language)) throw new Error("Default domain configuration is invalid.");
 if (config.users.filter(x => x.username && x.key && x.activated && Array.isArray(x.domains) && !isNaN(x.size)).length < config.users.length) throw new Error("User configuration is invalid.");
