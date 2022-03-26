@@ -1,7 +1,7 @@
 
 # 📰 Instructions
 - Configure the configuration file (`src/config.json`) using `src/example.json`
-- Install packages (`npm install` in the CMD)
+- Install packages (`npm install` in the terminal)
 - Run it ! `npm start`
 
 # 🔎 Examples
