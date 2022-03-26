@@ -5,14 +5,14 @@
 			"color": "#ffb330",
 			"nameWeb": "VoltBot — Screenshot",
 			"hostname": "s.voltbot.xyz",
-			"language": "en",
+			"language": "en_US",
 			"icon": "https://raw.githubusercontent.com/VoltTeam/Assets/main/Logo.png"
 		},
 		{
 			"hostname": "a.dam.best",
 			"color": "#ffb330",
 			"nameWeb": "Adam — Screenshot",
-			"language": "fr",
+			"language": "fr_FR",
 			"icon": "https://a.dam.best/medias/Adam/logo.png"
 		}
 	],
