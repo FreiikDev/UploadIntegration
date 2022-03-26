@@ -24,8 +24,7 @@
 			"key": "toto2007",
 			"activated": true,
 			"domains": [
-				"a.dam.best",
-				"i.chill.wiki"
+				"all"
 			],
 			"size": 1337
 		}
