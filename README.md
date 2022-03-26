@@ -14,7 +14,7 @@
 # How we can use it?
 ### You can configure a system with separated "account".
 #### For that, run `npm run generate` and follow instructions.
-<img alt="Example generate" src="https://s.voltbot.xyz/medias/AG9X.gif" target="_blank" />
+<img alt="Example generate" src="https://s.voltbot.xyz/medias/Adam/AG9X.gif" target="_blank" />
 
 #### If you use ShareX, import the generated file (in .SXCU) just by double clicking on the file.
 
