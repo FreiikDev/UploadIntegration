@@ -1,13 +1,17 @@
 {
-  "name": "ScreenshotEmbedder",
-  "description": "Make your screenshot with beauty <3.",
+  "name": "UploadIntegration",
+  "description": "Make your upload with beauty <3.",
   "version": "3.0.0",
   "author": "D0wzy, Freiik",
   "main": "src/app.js",
   "keywords": [
     "screenshot",
-    "embedder",
-    "screenshotembedder",
+    "video",
+    "audio",
+    "embed",
+    "integration",
+    "upload",
+    "UploadIntegration",
     "expressjs",
     "website"
   ],
@@ -20,8 +24,9 @@
     "ejs": "latest",
     "express": "latest",
     "formidable": "latest",
+    "i18n": "latest",
     "moment-timezone": "latest",
-    "self-reload-json": "latest",
-    "readline": "latest"
+    "readline": "latest",
+    "self-reload-json": "latest"
   }
 }

@@ -1,25 +1,15 @@
 {
-   "port": 80,
-   "timezone": "Europe/Paris",
-   "error": "File not found",
    "domains": [
       {
          "default": true,
          "color": "#2f3136",
          "hostname": "example.com",
-         "nameWeb": "ScreenshotEmbedder",
-         "language": "en",
+         "nameWeb": "UploadIntegration",
+         "language": "en_US",
          "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
       }
    ],
-   "languages": [
-      {
-         "locale": "en",
-         "uploadedOn": "Uploaded on",
-         "uploadedAt": "at",
-         "uploadedBy": "by"
-      }
-   ],
-   "users": [
-   ]
+   "port": 80,
+   "timezone": "Europe/Paris",
+   "users": []
 }

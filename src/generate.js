@@ -21,7 +21,7 @@ let readline = require("readline"),
         });
     };
 
-if (!existsSync(config)) throw new Error("You don't have the file config.json, please look an example at https://github.com/FreiikDev/ScreenshotEmbedder");
+if (!existsSync(config)) throw new Error("You don't have the file config.json, please look an example at https://github.com/FreiikDev/UploadIntegration");
 config = new require(config);
 let defaultDomain = config.domains.filter(x => x.default);
 if (defaultDomain <= 0) throw new Error("There's no default domain in the configuration file.");
@@ -29,7 +29,7 @@ defaultDomain = defaultDomain[0];
 if (config.users.filter(x => x.username && x.key && x.activated && Array.isArray(x.domains)).length < config.users.length) throw new Error("User configuration is invalid.");
 
 async function main(error) {
-    let r = await question("What is your username ?", error)
+    let r = await question("What is your username?", error)
     if (!r || config.users.filter(x => x.username.toLowerCase() === r.toLowerCase()) === true) return main("The user aleardy exists in the configuration file.")
     username = r;
     return getUserDomains();
@@ -63,7 +63,7 @@ function end() {
         if (!existsSync(`${__dirname}/medias/${username}`)) mkdirSync(`${__dirname}/medias/${username}`);
         writeFileSync(`${__dirname}/config.json`, JSON.stringify(config, null, 3));
         writeFileSync(`${path}`, JSON.stringify({
-            "Name": "ScreenshotEmbedder by D0wzy & Freiik",
+            "Name": "UploadIntegration by D0wzy & Freiik",
             "DestinationType": "ImageUploader",
             "RequestMethod": "POST",
             "RequestURL": `https://${domains[0] === "all" ? defaultDomain.hostname : domains[0]}/upload/`,

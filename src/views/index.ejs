@@ -14,7 +14,7 @@
     <meta property="og:title" content="<%= name %> (<%= size %>)"/>
     <meta property="og:type" content="article">
     <meta property="og:url" content="<%= link %>">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:locale" content="<%= language %>">
     <link rel="icon" href="<%= icon %>" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,9 +25,19 @@
 <body>
 <div>
     <h1><%= name %> - <span><%= size %></span></h1>
-    <a id="image-link" href="<%= link %>" target="_blank">
-        <img src="<%= link %>" alt="Responsive image">
-    </a>
+        <% if(name.toLowerCase().endsWith("mp4") || name.toLowerCase().endsWith("webm")){ %>
+        <video controls>
+            <source src="<%= link %>">
+        </video>
+          <% }else if(name.toLowerCase().endsWith("ogg") ||  name.toLowerCase().endsWith("wav") || name.toLowerCase().endsWith("mp3")){ %>  
+            <audio controls src="<%= link %>"></audio>
+         <% } else if(name.toLowerCase().endsWith("bmp") || name.toLowerCase().endsWith("jpg") || name.toLowerCase().endsWith("jpeg") || name.toLowerCase().endsWith("png") || name.toLowerCase().endsWith("gif") || name.toLowerCase().endsWith("webp")) {%>
+        <a id="image-link" href="<%= link %>" target="_blank">
+            <img src="<%= link %>" alt="Responsive image">
+        </a>
+        <% } else { %>
+            <a class ="btn" href="<%= link %>" style="background-color:<%= color %>" target="_blank"><%= downloadFile %></a>
+        <% }%>
     <br><br>
     <h2><%= created %></h2>
 </div>

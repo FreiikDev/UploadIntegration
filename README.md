@@ -27,11 +27,11 @@
 <img alt="Example Share X" src="https://s.voltbot.xyz/medias/Adam/2Nfq.png" target="_blank" />
 
 ### Also, you can make another configuration as a SFTP/FTP server:
-- Remote directory: `ScreenshotEmbedder/src/medias/`
+- Remote directory: `UploadIntegration/src/medias/`
 - URL path: `(http/https)://your_hostname/`
 - Uncheck *"Append remote directory to URL path"*
 
-#### PS: if you have another uploader, you can put files in `ScreenshotEmbedder/src/medias/`.  
+#### PS: if you have another uploader, you can put files in `UploadIntegration/src/medias/`.  
 
 # 📙 Dependencies
 - Crypto (https://npmjs.org/crypto)

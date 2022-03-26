@@ -1,0 +1,13 @@
+{
+	"accountDisabled": "Your account is disabled by your administrator.",
+	"createdAt.withUser": "Uploaded on {{{days}}} by {{{user}}} at {{{hours}}}",
+	"createdAt.withoutUser": "Uploaded on {{{days}}} at {{{hours}}}",
+	"dateFormat": "MM/DD/YYYY HH:mm:ss",
+	"downloadFile": "Download file",
+	"error.404": "404 Not Found",
+	"error.500": "Internal Server Error",
+	"invalidAPI": "The provided API key is invalid.",
+	"restrictedDomainAccess": "Your account don't have access to this domain, please contact your administrator.",
+	"uploadNotAllowed": "You are not allowed to upload this type of file.",
+	"uploadedOn": "{{{user}}} uploaded on {{{hostname}}}: {{{filename}}}"
+}

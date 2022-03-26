@@ -1,49 +1,33 @@
 {
-  "port": 80,
-  "timezone": "ETC/GMT+0",
-  "error": "You're lost? https://volt.science",
-  "domains": [
-    {
-      "default": true,
-      "color": "#ffb330",
-      "nameWeb": "VoltBot — Screenshot",
-      "hostname": "s.voltbot.xyz",
-      "language": "en",
-      "icon": "https://raw.githubusercontent.com/VoltBot-Discord/Default-Website/master/assets/img/logo.png"
-    },
-    {
-      "hostname": "a.dam.best",
-      "color": "#ffb330",
-      "nameWeb": "Adam — Screenshot",
-      "language": "fr",
-      "icon": "https://cdn.discordapp.com/avatars/809849085305421835/2a8ab285b622eaa8fa5980dacb38aca7.png?size=128",
-      "format": "DD/MM/YYYY HH:mm:ss"
-    }
-  ],
-  "languages": [
-    {
-      "locale": "fr",
-      "uploadedOn": "Téléversé le",
-      "uploadedAt": "à",
-      "uploadedBy": "par"
-    },
-    {
-      "locale": "en",
-      "uploadedOn": "Uploaded on",
-      "uploadedAt": "at",
-      "uploadedBy": "by"
-    }
-  ],
-  "users": [
-    {
-      "username": "Adam",
-      "key": "toto2007",
-      "activated": true,
-      "domains": [
-        "a.dam.best",
-        "i.chill.wiki"
-      ],
-      "size": 1337
-    }
-  ]
+	"domains": [
+		{
+			"default": true,
+			"color": "#ffb330",
+			"nameWeb": "VoltBot — Screenshot",
+			"hostname": "s.voltbot.xyz",
+			"language": "en",
+			"icon": "https://raw.githubusercontent.com/VoltTeam/Assets/main/Logo.png"
+		},
+		{
+			"hostname": "a.dam.best",
+			"color": "#ffb330",
+			"nameWeb": "Adam — Screenshot",
+			"language": "fr",
+			"icon": "https://a.dam.best/medias/Adam/logo.png"
+		}
+	],
+	"port": 80,
+	"timezone": "ETC/GMT+1",
+	"users": [
+		{
+			"username": "Adam",
+			"key": "toto2007",
+			"activated": true,
+			"domains": [
+				"a.dam.best",
+				"i.chill.wiki"
+			],
+			"size": 1337
+		}
+	]
 }

@@ -31,3 +31,20 @@ img {
     max-height: 80%;
     border-radius: 5px;
 }
+
+video {
+    max-height: 80%;
+    border-radius: 5px;
+}
+
+.btn {
+	box-shadow: 0px 0px 5px 0px #000000;
+	background-color:#000000;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:17px;
+	padding:16px 32px;
+	text-decoration:none;
+}

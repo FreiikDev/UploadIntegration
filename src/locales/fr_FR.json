@@ -1,0 +1,13 @@
+{
+	"accountDisabled": "Votre compte est désactivé par votre administrateur.",
+	"createdAt.withUser": "Téléversé le {{{days}}} par {{{user}}} à {{{hours}}}",
+	"createdAt.withoutUser": "Téléversé le {{{days}}} à {{{hours}}}",
+	"dateFormat": "DD/MM/YYYY HH:mm:ss",
+	"downloadFile": "Télécharger le fichier",
+	"error.404": "Page non trouvée",
+	"error.500": "Erreur serveur interne",
+	"invalidAPI": "La clé API fournie n'est pas valide.",
+	"restrictedDomainAccess": "Votre compte n'a pas accès à ce domaine, veuillez contacter votre administrateur.",
+	"uploadNotAllowed": "Vous n'êtes pas autorisé à télécharger ce type de fichier.",
+	"uploadedOn": "{{{user}}} a téléversé sur {{{hostname}}}: {{{filename}}}"
+}
