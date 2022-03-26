@@ -34,13 +34,14 @@
 #### PS: if you have another uploader, you can put files in `UploadIntegration/src/medias/`.  
 
 # 📙 Dependencies
-- Crypto (https://npmjs.org/crypto)
 - EJS (https://npmjs.org/ejs)
 - ExpressJS (https://npmjs.org/express)
 - Formidable (https://npmjs.org/formidable)
 - FS (https://www.npmjs.com/package/fs)
+- i18n (https://www.npmjs.com/package/i18n)
 - Moment-Timezone (https://npmjs.org/moment-timezone)
 - Path (https://www.npmjs.com/package/path)
+- Readline (https://www.npmjs.com/package/readline)
 - Font of the website : PT Sans (https://fonts.google.com/specimen/PT+Sans)
 
 Project protected with MIT licence. Base realized by [D0wzy](https://github.com/D0wzy), modified & rewrited by me (https://github.com/FreiikDev).
