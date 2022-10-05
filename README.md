@@ -9,7 +9,7 @@
 <img alt="Example 1" src="https://i.volt.science/medias/Adam/INDId.png" target="_blank" />
 
 ### On website
-<img alt="Example 2" src="https://i.volt.science/medias/Adam/cF0RN.png" target="_blank" />
+<img alt="Example 2" src="https://i.volt.science/medias/Adam/8JgIx.png" target="_blank" />
 
 # How we can use it?
 ### You can configure a system with separated "account".
@@ -24,7 +24,7 @@
 - You need to write `file` under "File from name:"
 - In headers, please write apikey as name and write the key in the value section
 - Into URL, you can write `$json:link$`
-<img alt="Example Share X" src="https://i.volt.science/medias/DQdBR.png" target="_blank" />
+<img alt="Example Share X" src="https://i.volt.science/medias/Adam/DQdBR.png" target="_blank" />
 
 ### Also, you can make another configuration as a SFTP/FTP server:
 - Remote directory: `UploadIntegration/src/medias/(your_username or nothing)`
