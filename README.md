@@ -6,15 +6,15 @@
 
 # 🔎 Examples
 ### On Discord
-<img alt="Example 1" src="https://s.voltbot.xyz/medias/Adam/A5HI.png" target="_blank" />
+<img alt="Example 1" src="https://i.volt.science/medias/Adam/INDId.png" target="_blank" />
 
 ### On website
-<img alt="Example 2" src="https://s.voltbot.xyz/medias/Adam/msuI.png" target="_blank" />
+<img alt="Example 2" src="https://i.volt.science/medias/Adam/cF0RN.png" target="_blank" />
 
 # How we can use it?
 ### You can configure a system with separated "account".
 #### For that, run `npm run generate` and follow instructions.
-<img alt="Example generate" src="https://s.voltbot.xyz/medias/Adam/AG9X.gif" target="_blank" />
+<img alt="Example generate" src="https://i.volt.science/medias/Adam/po0hu.gif" target="_blank" />
 
 #### If you use ShareX, import the generated file (in .SXCU) just by double clicking on the file.
 
@@ -24,14 +24,14 @@
 - You need to write `file` under "File from name:"
 - In headers, please write apikey as name and write the key in the value section
 - Into URL, you can write `$json:link$`
-<img alt="Example Share X" src="https://s.voltbot.xyz/medias/Adam/2Nfq.png" target="_blank" />
+<img alt="Example Share X" src="https://i.volt.science/medias/DQdBR.png" target="_blank" />
 
 ### Also, you can make another configuration as a SFTP/FTP server:
-- Remote directory: `UploadIntegration/src/medias/`
+- Remote directory: `UploadIntegration/src/medias/(your_username or nothing)`
 - URL path: `(http/https)://your_hostname/`
 - Uncheck *"Append remote directory to URL path"*
 
-#### PS: if you have another uploader, you can put files in `UploadIntegration/src/medias/`.  
+#### PS: if you have another uploader, you can put files in `UploadIntegration/src/medias/(your_username or nothing)`.  
 
 # 📙 Dependencies
 - EJS (https://npmjs.org/ejs)
