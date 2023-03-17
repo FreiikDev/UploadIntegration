@@ -9,6 +9,10 @@
       "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
     }
   ],
+  "logging": {
+    "enabled": true,
+    "file": "log.txt"
+  },
   "port": 80,
   "timezone": "Europe/Paris",
   "users": []

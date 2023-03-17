@@ -16,6 +16,10 @@
       "icon": "https://freiik.com/medias/Adam/logo.png"
     }
   ],
+  "logging": {
+    "enabled": true,
+    "file": "log.txt"
+  },
   "port": 80,
   "timezone": "ETC/GMT+1",
   "users": [

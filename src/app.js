@@ -2,11 +2,10 @@ const express = require("express"),
     moment = require("moment-timezone"),
     {IncomingForm} = require("formidable"),
     SelfReloadJson = require("self-reload-json"),
-    {renameSync, mkdirSync, existsSync, readdirSync, statSync} = require("fs"),
+    {appendFile, renameSync, mkdirSync, existsSync, readdirSync, statSync} = require("fs"),
     {I18n} = require("i18n"),
     {join} = require("path"),
     app = express(),
-    Logger = (e, n) => console.log(`[${moment(Date.now()).format("HH:mm:ss")}] [${e.toUpperCase()}] ${n}`),
     i18n = new I18n({
         directory: join(__dirname, "locales")
     });
@@ -19,12 +18,15 @@ if (defaultDomain <= 0) throw new Error("There's no default domain in the config
 if (defaultDomain = defaultDomain[0], !defaultDomain.language || !i18n.getLocales().includes(defaultDomain.language)) throw new Error("Default domain configuration is invalid.");
 if (config.users.filter((e => e.username && e.key && e.activated && Array.isArray(e.domains) && !isNaN(e.size))).length < config.users.length) throw new Error("User configuration is invalid.");
 
-function domainSettings(e) {
+
+const Logger = (e, n) => {
+    const z = `[${moment(Date.now()).format("HH:mm:ss")}] [${e.toUpperCase()}] ${n}`;
+    if(config.logging) if(config.logging.enabled && config.logging.file) if(config.logging.enabled) appendFile(config.logging.file,`${z}\n`, () => {})
+    console.log(z);
+}, domainSettings = (e) => {
     let n = config.domains.filter((e => e.hostname)).filter((n => e.hostname === n.hostname));
     return n = n.length <= 0 ? defaultDomain : n[0], i18n.getLocales().includes(n.language) ? e.setLocale(n.language) : e.setLocale("en"), n
-}
-
-function error(d, r, t, e) {
+}, error = (d, r, t, e) => {
     d = domainSettings(r);
     return r.status(t).render("./error.ejs", {
         error: {
