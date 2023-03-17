@@ -25,21 +25,27 @@
 <body>
 <div>
     <h1><%= name %> - <span><%= size %></span></h1>
-        <% if(name.toLowerCase().endsWith("mp4") || name.toLowerCase().endsWith("webm")){ %>
+    <% if(name.toLowerCase().endsWith("mp4") || name.toLowerCase().endsWith("m4v") || name.toLowerCase().endsWith("webm")){ %>
         <video controls>
             <source src="<%= link %>">
         </video>
-          <% }else if(name.toLowerCase().endsWith("ogg") ||  name.toLowerCase().endsWith("wav") || name.toLowerCase().endsWith("mp3")){ %>  
-            <audio controls src="<%= link %>"></audio>
-         <% } else if(name.toLowerCase().endsWith("bmp") || name.toLowerCase().endsWith("jpg") || name.toLowerCase().endsWith("jpeg") || name.toLowerCase().endsWith("png") || name.toLowerCase().endsWith("gif") || name.toLowerCase().endsWith("webp")) {%>
+    <% }else if(name.toLowerCase().endsWith("ogg") || name.toLowerCase().endsWith("wav") || name.toLowerCase().endsWith("mp3")){ %>
+        <audio controls src="<%= link %>"></audio>
+    <% } else if(name.toLowerCase().endsWith("bmp") || name.toLowerCase().endsWith("jpg") || name.toLowerCase().endsWith("jpeg") || name.toLowerCase().endsWith("png") || name.toLowerCase().endsWith("gif") || name.toLowerCase().endsWith("webp")) { %>
         <a id="image-link" href="<%= link %>" target="_blank">
-            <img src="<%= link %>" alt="Responsive image">
+            <img src="<%= link %>" alt="<%= name %> (<%= size %>) - <%= created %>">
         </a>
-        <% } else { %>
-            <a class ="btn" href="<%= link %>" style="background-color:<%= color %>" target="_blank"><%= downloadFile %></a>
-        <% }%>
+    <% } else { %>
+        <a class="btn" href="<%= link %>" style="background-color:<%= color %>" target="_blank"><%= downloadFile %></a>
+    <% } %>
     <br><br>
     <h2><%= created %></h2>
+    <div class="credit">
+        <a href="https://github.com/FreiikDev/UploadIntegration">
+            <img class="circle-icon"
+                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+        </a>
+    </div>
 </div>
 </body>
 </html>

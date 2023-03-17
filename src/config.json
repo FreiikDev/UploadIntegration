@@ -1,15 +1,15 @@
 {
-   "domains": [
-      {
-         "default": true,
-         "color": "#2f3136",
-         "hostname": "example.com",
-         "nameWeb": "UploadIntegration",
-         "language": "en_US",
-         "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-      }
-   ],
-   "port": 80,
-   "timezone": "Europe/Paris",
-   "users": []
+  "domains": [
+    {
+      "default": true,
+      "color": "#2f3136",
+      "hostname": "example.com",
+      "nameWeb": "UploadIntegration",
+      "language": "en_US",
+      "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+    }
+  ],
+  "port": 80,
+  "timezone": "Europe/Paris",
+  "users": []
 }

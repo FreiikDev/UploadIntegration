@@ -1,7 +1,7 @@
 {
   "name": "UploadIntegration",
   "description": "Make your upload with beauty <3.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "D0wzy, Freiik",
   "main": "src/app.js",
   "keywords": [

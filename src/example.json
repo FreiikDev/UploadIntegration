@@ -1,32 +1,32 @@
 {
-	"domains": [
-		{
-			"default": true,
-			"color": "#ffb330",
-			"nameWeb": "VoltBot — Screenshot",
-			"hostname": "s.voltbot.xyz",
-			"language": "en_US",
-			"icon": "https://raw.githubusercontent.com/VoltTeam/Assets/main/Logo.png"
-		},
-		{
-			"hostname": "a.dam.best",
-			"color": "#ffb330",
-			"nameWeb": "Adam — Screenshot",
-			"language": "fr_FR",
-			"icon": "https://a.dam.best/medias/Adam/logo.png"
-		}
-	],
-	"port": 80,
-	"timezone": "ETC/GMT+1",
-	"users": [
-		{
-			"username": "Adam",
-			"key": "toto2007",
-			"activated": true,
-			"domains": [
-				"all"
-			],
-			"size": 1337
-		}
-	]
+  "domains": [
+    {
+      "default": true,
+      "color": "#ffb330",
+      "nameWeb": "Volt — Screenshot",
+      "hostname": "i.volt.science",
+      "language": "en_US",
+      "icon": "https://raw.githubusercontent.com/VoltTeam/Assets/main/Logo.png"
+    },
+    {
+      "hostname": "freiik.com",
+      "color": "#ffb330",
+      "nameWeb": "Adam — Screenshot",
+      "language": "fr_FR",
+      "icon": "https://freiik.com/medias/Adam/logo.png"
+    }
+  ],
+  "port": 80,
+  "timezone": "ETC/GMT+1",
+  "users": [
+    {
+      "username": "Adam",
+      "key": "toto2007",
+      "activated": true,
+      "domains": [
+        "all"
+      ],
+      "size": 1337
+    }
+  ]
 }
