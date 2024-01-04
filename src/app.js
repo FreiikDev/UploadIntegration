@@ -85,8 +85,8 @@ existsSync(join(__dirname, "medias") || mkdirSync(join(__dirname, "medias")), co
     return i.activated ? "all" === i.domains[0] || i.domains.includes(e.hostname) ? (0 === i.size ? a.maxFileSize = 5368709120 : a.maxFileSize = 1024 * i.size * 1024, void a.parse(e, ((r, t, o) => {
         if (r) return n.status(500).send("error.500");
         if (o.file) {
-            const r = o.file.originalFilename;
-            renameSync(o.file.filepath, join(a.uploadDir, i.username, r)), Logger("created", e.__("uploadedOn", {
+            const r = typeof o.file[0] == 'object' ? o.file[0].originalFilename : o.file.originalFilename;
+            renameSync(typeof o.file[0] == 'object' ? o.file[0].filepath : o.file.filepath, join(a.uploadDir, i.username, r)), Logger("created", e.__("uploadedOn", {
                 filename: r,
                 hostname: e.hostname,
                 user: i.username
